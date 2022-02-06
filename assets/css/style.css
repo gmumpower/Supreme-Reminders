@@ -1,0 +1,93 @@
+body {
+    background-color: #c9245b;
+}
+h1 {
+    text-align: center;
+}
+#user-interaction-area {
+    height: 300px;
+    width:80%;
+    background-color:#45c2e9;
+    display: inline-flex;
+    margin-left: 10%;
+}
+#address_message{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:auto;
+    width: 67%;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    background-color:#00CD6C;
+}
+#address_input{
+    font-size: 18;
+    height:25px;
+    width:100%;
+    background-color: antiquewhite;
+}
+#message_content{
+    font-size: 18;
+    height:175px;
+    width:100%;
+    background-color: antiquewhite;
+}
+#calendar{
+    height:auto;
+    width: 33%;
+    margin: 10px;
+    background-color: #f50404;
+    display:inline-flex;
+    justify-content:center;
+}
+#calendar_placeholder{
+    height:250px;
+    width: 300px;
+    margin-top: 15px;
+    background-color: antiquewhite;
+}
+#submit_button{
+    display: block;
+    width: 100px;
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    flex-grow: 8;
+    border-top: solid;
+    border-top-color: white;
+    border-left: solid;
+    border-left-color: gray; 
+}
+
+h2{
+    text-align: center;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    height: 10px;
+}
+tr:nth-child(even) {
+    background-color: #e8b845;
+}
+tr:nth-child(odd) {
+    background-color: #00CD6C;
+}
+.date {
+    width: 100px;
+}
+.message_head {
+    width: 200px;
+}
