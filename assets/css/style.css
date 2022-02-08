@@ -1,13 +1,16 @@
 body {
-    background-color: #c9245b;
+    background-color: #4a154b;
 }
 h1 {
     text-align: center;
+    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    color: white;
+    display: block;
 }
 #user-interaction-area {
     height: 300px;
     width:80%;
-    background-color:#45c2e9;
+    background-color: #4a154b;
     display: inline-flex;
     margin-left: 10%;
 }
@@ -20,7 +23,8 @@ h1 {
     margin: 10px;
     padding: 20px;
     display: flex;
-    background-color:#00CD6C;
+    background-color: #fff;
+    border-radius: 2px;
 }
 #address_input{
     font-size: 18;
@@ -38,33 +42,42 @@ h1 {
     height:auto;
     width: 33%;
     margin: 10px;
-    background-color: #f50404;
+    background-color: #fff;
     display:inline-flex;
     justify-content:center;
+    border-radius: 2px;
 }
 #calendar_placeholder{
     height:250px;
     width: 300px;
     margin-top: 15px;
-    background-color: antiquewhite;
+    background-color: white;
 }
 #submit_button{
     display: block;
-    width: 100px;
+    width: 40%;
     height: 50px;
-    display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     flex-grow: 8;
-    border-top: solid;
-    border-top-color: white;
-    border-left: solid;
-    border-left-color: gray; 
+    background-color: #fff;
+    color: #611f69;
+    fill: #611f69;
+    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 2px;
 }
 
 h2{
     text-align: center;
+    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    color: white
 }
 table {
     font-family: arial, sans-serif;
@@ -90,4 +103,7 @@ tr:nth-child(odd) {
 }
 .message_head {
     width: 200px;
+}
+#logo {
+    flex-wrap: wrap;
 }
