@@ -1,102 +1,222 @@
 body {
-    background-color: #4a154b;
-}
-h1 {
+
+    display: flex;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    background-color: #FFFCFF;
+    flex-wrap: wrap;
+  }
+  button {
+    width: 75px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px rgb(54, 53, 53);
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+  }
+  #header {
+    padding: 10px;
+    color: #d36c6c;
+    font-size: 26px;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+  }
+h1{
     text-align: center;
-    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
-    color: white;
-    display: block;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
 }
-#user-interaction-area {
-    height: 300px;
-    width:80%;
-    background-color: #4a154b;
-    display: inline-flex;
-    margin-left: 10%;
+  #user-interaction-area {
+    width:500px;
+    background-color:#ffffff;
+    flex-wrap: wrap;
+    display: flex;
+    position: relative;
+    margin-right: 0%;
+    margin-top: 0;
+    margin-bottom: 70px;
+
 }
 #address_message{
     display: inline-flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     height:auto;
-    width: 67%;
+    width: 500px;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;;
     display: flex;
-    background-color: #fff;
-    border-radius: 2px;
+
+    background-color:#e4eee9;
+
 }
-#address_input{
-    font-size: 18;
-    height:25px;
-    width:100%;
-    background-color: antiquewhite;
-}
+
 #message_content{
     font-size: 18;
     height:175px;
     width:100%;
     background-color: antiquewhite;
-}
-#calendar{
-    height:auto;
-    width: 33%;
-    margin: 10px;
-    background-color: #fff;
-    display:inline-flex;
-    justify-content:center;
-    border-radius: 2px;
-}
-#calendar_placeholder{
-    height:250px;
-    width: 300px;
-    margin-top: 15px;
-    background-color: white;
-}
-#submit_button{
-    display: block;
-    width: 40%;
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    flex-grow: 8;
-    background-color: #fff;
-    color: #611f69;
-    fill: #611f69;
-    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-    border-radius: 2px;
+
 }
 
-h2{
+
+#address_input{
+    font-size: 18;
+    height:50px;
+    width:100%;
+    background-color: antiquewhite;
+}
+  
+  #header button {
+    background-color:#92a1d1;
+  }
+  #container {
+    width: 770px;
+    position: relative;
+    margin-left: 10%;
+    display: inline-block;
+  }
+  #weekdays {
+    width: 100%;
+    display: flex;
+    color: #247BA0;
+  }
+  #weekdays div {
+    width: 100px;
+    padding: 10px;
+  }
+  #calendar {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin:auto;
+  }
+  .day {
+    width: 100px;
+    padding: 10px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: white;
+    margin: 5px;
+    box-shadow: 0px 0px 3px #CBD4C2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .day:hover {
+    background-color: #e8faed;
+  }
+  
+  .day + #currentDay {
+    background-color:#e8f4fa;
+  }
+  .event {
+    font-size: 10px;
+    padding: 3px;
+    background-color: #58bae4;
+    color: white;
+    border-radius: 5px;
+    max-height: 55px;
+    overflow: hidden;
+  }
+  .padding {
+    cursor: default !important;
+    background-color: #FFFCFF !important;
+    box-shadow: none !important;
+  }
+  #newEventModal, #deleteEventModal {
+    display: none;
+    z-index: 20;
+    padding: 25px;
+    background-color: #e8f4fa;
+    box-shadow: 0px 0px 3px black;
+    border-radius: 5px;
+    width: 350px;
+    top: 100px;
+    left: calc(50% - 175px);
+    position: absolute;
+    font-family: sans-serif;
+  }
+  #eventTitleInput {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 3px gray;
+  }
+  #eventTitleInput.error {
+    border: 2px solid red;
+  }
+  #cancelButton, #deleteButton {
+    background-color: #d36c6c;
+  }
+  #saveButton, #closeButton {
+    background-color: #92a1d1;
+  }
+  #eventText {
+    font-size: 14px;
+  }
+  #modalBackDrop {
+    display: none;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+  }
+
+
+
+  #submit_button{
+    width: 75px;
+    height: 40px; 
+    position: relative;
+    margin: 5px;
+    
+}
+  h2{
     text-align: center;
-    font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
-    color: white
+
+    margin: 5px;
+   
+    
+
 }
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+table{
+
+    width:600px;
+    background-color:#6c8992;
+    flex-wrap: wrap;
+    display:inline-flexbox;
+    position: relative;
+    margin: 5px;
+    
 }
+
 td{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
     height: 10px;
+    font-size: 17px;
 }
 tr:nth-child(even) {
-    background-color: #e8b845;
+    background-color: #ebd5a2;
 }
 tr:nth-child(odd) {
-    background-color: #00CD6C;
+    background-color: #c0e0d1;
 }
 .date {
     width: 230px;

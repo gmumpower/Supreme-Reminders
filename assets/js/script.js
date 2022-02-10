@@ -1,53 +1,136 @@
-function demo_populate_existing_reminders() {
-    
-    // load localStorage with demo messages/adressees.
-    const demo_messages = [9];
-    demo_messages[0] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";  demo_messages[1] = "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
-    demo_messages[2] = "Ut enim ad minim veniam.";
-    demo_messages[3] = "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
-    demo_messages[4] = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur";
-    demo_messages[5] = "Excepteur sint occaecat cupidatat non proident";
-    demo_messages[6] = "Sunt in culpa qui officia deserunt mollit anim id est laborum";
-    demo_messages[7] = "Elementum curabitur vitae nunc sed";
-    demo_messages[8] = "Ellentesque nec nam aliquam sem et.";
-    //demo
-    const demo_addressee = [9];
-    demo_addressee[0] = "@Elijah";
-    demo_addressee[1] = "@Willaim";
-    demo_addressee[2] = "@James";
-    demo_addressee[3] = "@Benjamin";
-    demo_addressee[4] = "@Charlotte";
-    demo_addressee[5] = "@Sophia";
-    demo_addressee[6] = "@Amelia";
-    demo_addressee[7] = "@Isabella";
-    demo_addressee[8] = "@Olivia";
-    //demo
-    const recalls = [9];
-    for(var i = 0; i < 9; i++){
-        //demo collision avoidance. 
-        var dtg = moment().add(i, 'seconds').format('MMMM Do YYYY, h:mm:ss a');
-        //keys are prefixed with "*SR*" so that they are searchable. 
-        var key = "*SR*" + dtg;
-        //demo_addressee and demo_meassage are concatenated with the split token "*SP*".
-        localStorage.setItem(key, demo_addressee[i] + "*SR*" + demo_messages[i]);
-    }
-    //Search localStorage for all keys prefixed with "*SR*".
-    var j = 0;
-    for(var i = 0; i < localStorage.length; i++){
-        var currentKey = localStorage.key(i);
-        if(currentKey.substring(0,4) == "*SR*"){
-            recalls[j++] = currentKey;
-        }
-    }
-    for(var i = 0; i < 9; i++){
-        //Strip "*SR*" prefix and post to date column.
-        document.getElementById("line-"+i.toString()).children[0].innerHTML = recalls[i].split("*SR*")[1];
-        var record = localStorage.getItem(recalls[i]);
-        //Split record at "*SR*" token, put addressee and message in respective columns.
-        document.getElementById("line-"+i.toString()).children[1].innerHTML = record.split("*SR*")[0];
-        document.getElementById("line-"+i.toString()).children[2].innerHTML = record.split("*SR*")[1];
-        console.log("line-"+i.toString());
-    }
+
+let nav = 0;
+let clicked = null;
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
+const calendar = document.getElementById('calendar');
+const newEventModal = document.getElementById('newEventModal');
+const deleteEventModal = document.getElementById('deleteEventModal');
+const backDrop = document.getElementById('modalBackDrop');
+const eventTitleInput = document.getElementById('eventTitleInput');
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function openModal(date) {
+  clicked = date;
+
+  const eventForDay = events.find(e => e.date === clicked);
+
+  if (eventForDay) {
+    document.getElementById('eventText').innerText = eventForDay.title;
+    deleteEventModal.style.display = 'block';
+  } else {
+    newEventModal.style.display = 'block';
+  }
+
+  backDrop.style.display = 'block';
 }
 
-document.onload=demo_populate_existing_reminders();
+function load() {
+  const dt = new Date();
+
+  if (nav !== 0) {
+    dt.setMonth(new Date().getMonth() + nav);
+  }
+
+  const day = dt.getDate();
+  const month = dt.getMonth();
+  const year = dt.getFullYear();
+
+  const firstDayOfMonth = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  
+  const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+  const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+
+  document.getElementById('monthDisplay').innerText = 
+    `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
+
+  calendar.innerHTML = '';
+
+  for(let i = 1; i <= paddingDays + daysInMonth; i++) {
+    const daySquare = document.createElement('div');
+    daySquare.classList.add('day');
+
+    const dayString = `${month + 1}/${i - paddingDays}/${year}`;
+
+    if (i > paddingDays) {
+      daySquare.innerText = i - paddingDays;
+      const eventForDay = events.find(e => e.date === dayString);
+
+      if (i - paddingDays === day && nav === 0) {
+        daySquare.id = 'currentDay';
+      }
+
+      if (eventForDay) {
+        const eventDiv = document.createElement('div');
+        eventDiv.classList.add('event');
+        eventDiv.innerText = eventForDay.title;
+        daySquare.appendChild(eventDiv);
+      }
+
+      daySquare.addEventListener('click', () => openModal(dayString));
+    } else {
+      daySquare.classList.add('padding');
+    }
+
+    calendar.appendChild(daySquare);    
+  }
+}
+
+function closeModal() {
+  eventTitleInput.classList.remove('error');
+  newEventModal.style.display = 'none';
+  deleteEventModal.style.display = 'none';
+  backDrop.style.display = 'none';
+  eventTitleInput.value = '';
+  clicked = null;
+  load();
+}
+
+function saveEvent() {
+  if (eventTitleInput.value) {
+    eventTitleInput.classList.remove('error');
+
+    events.push({
+      date: clicked,
+      title: eventTitleInput.value,
+    });
+
+    localStorage.setItem('events', JSON.stringify(events));
+    closeModal();
+  } else {
+    eventTitleInput.classList.add('error');
+  }
+}
+
+function deleteEvent() {
+  events = events.filter(e => e.date !== clicked);
+  localStorage.setItem('events', JSON.stringify(events));
+  closeModal();
+}
+
+function initButtons() {
+  document.getElementById('nextButton').addEventListener('click', () => {
+    nav++;
+    load();
+  });
+
+  document.getElementById('backButton').addEventListener('click', () => {
+    nav--;
+    load();
+  });
+
+  document.getElementById('saveButton').addEventListener('click', saveEvent);
+  document.getElementById('cancelButton').addEventListener('click', closeModal);
+  document.getElementById('deleteButton').addEventListener('click', deleteEvent);
+  document.getElementById('closeButton').addEventListener('click', closeModal);
+}
+
+initButtons();
+load();
+
