@@ -1,4 +1,5 @@
 body {
+
     display: flex;
     margin-top: auto;
     margin-left: auto;
@@ -39,7 +40,7 @@ h1{
     margin-right: 0%;
     margin-top: 0;
     margin-bottom: 70px;
-   
+
 }
 #address_message{
     display: inline-flex;
@@ -50,7 +51,9 @@ h1{
     margin: 10px;
     padding: 10px;;
     display: flex;
+
     background-color:#e4eee9;
+
 }
 
 #message_content{
@@ -60,6 +63,7 @@ h1{
     background-color: antiquewhite;
 
 }
+
 
 #address_input{
     font-size: 18;
@@ -174,6 +178,7 @@ h1{
   }
 
 
+
   #submit_button{
     width: 75px;
     height: 40px; 
@@ -183,9 +188,11 @@ h1{
 }
   h2{
     text-align: center;
+
     margin: 5px;
    
     
+
 }
 table{
 
@@ -212,8 +219,11 @@ tr:nth-child(odd) {
     background-color: #c0e0d1;
 }
 .date {
-    width: 100px;
+    width: 230px;
 }
 .message_head {
     width: 200px;
+}
+#logo {
+    flex-wrap: wrap;
 }
